@@ -3,9 +3,9 @@
   user: nvipin
   become: yes
   vars:
-    mysql_root_password: 'Password1'
-    mysql_admin_pass: 'p0!ntof5ale'
-    encrypt_key: 'dgE0NYhZTOHbE59eBpbMdEhZFc0DcsQF'
+    mysql_root_password: 'xxxxxxxxxx'
+    mysql_admin_pass: 'xxxxxxx'
+    encrypt_key: 'xxxxxxxxxxxx'
   
   tasks:
   - name: Install MariaDB server

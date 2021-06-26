@@ -1,0 +1,20 @@
+- name: Install driver build dependencies
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items:
+  - build-essential
+  - cmake
+  - libcups2-dev
+  - libcupsimage2-dev
+
+- name: Copy over build files
+  unarchive:
+    src: zj-58.tar.gz
+    dest: /tmp
+
+- name: Build and Install the driver
+  shell: cmake . && cmake --build . && make install
+  args:
+    chdir: /tmp/zj-58/
+

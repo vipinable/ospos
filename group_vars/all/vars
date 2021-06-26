@@ -1,0 +1,5 @@
+mysql_root_password: '{{ vault_mysql_root_password }}'
+mysql_admin_pass: '{{ vault_mysql_admin_pass }}'
+encrypt_key: '{{ vault_encrypt_key }}'
+jfrog_user: '{{ vault_jfrog_user }}' 
+jfrog_pass: '{{ vault_jfrog_pass }}'

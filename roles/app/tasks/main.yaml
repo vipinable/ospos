@@ -1,0 +1,78 @@
+- name: Install Apache Web Server
+  package:
+    name: apache2
+    state: present
+    update_cache: yes
+      
+- name: Install prerequsites packages
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - unzip
+
+- name: Install PHP and dependencies
+  package: 
+    name: '{{ item }}'
+    state: present 
+    update_cache: yes
+  with_items:
+    - phpmyadmin
+    - php-curl
+    - php-bcmath
+    - php-intl
+    - php-mbstring
+    - php-gd
+
+- name: Download the ospos package if not present
+  get_url:
+    url: https://theworkingmethods.jfrog.io/artifactory/ospos-generic-local/opensourcepos.20210101114640.3.3.3.8e52bd.zip
+    dest: /var/tmp 
+    url_username: '{{ jfrog_user }}'
+    url_password: '{{ jfrog_pass }}'
+
+- name: Deploy the application
+  unarchive: 
+    src: /var/tmp/opensourcepos.20210101114640.3.3.3.8e52bd.zip
+    dest: /var/www/html
+    owner: www-data 
+    group: www-data
+
+- name: Configure App
+  template:
+    src: '{{ item }}.j2'
+    dest: '/var/www/html/application/config/{{ item }}'
+  with_items:
+    - database.php
+    - config.php
+
+- name: Set file permissions
+  file:
+    dest: '{{ item.name }}'
+    mode: '{{ item.mode }}'
+  with_items:
+    - { name: '/var/www/html/application/logs', mode: '0750' }
+    - { name: '/var/www/html/public/uploads', mode: '0750' }
+    - { name: '/var/www/html/public/uploads/item_pics', mode: '0750' }
+    - { name: '/var/www/html/import_customers.csv', mode: '0640' }
+
+- name: Configure htaccess
+  copy:
+    src: htaccess
+    dest: /var/www/html/public/.htaccess
+  notify:
+  - restartApache
+
+- name: Configure Apache
+  copy:
+    src: apache2.conf
+    dest: /etc/apache2/apache2.conf
+  notify:
+  - restartApache
+
+- name: enabled mod_rewrite
+  apache2_module:
+    name: rewrite
+    state: present
+  notify:
+  - restartApache

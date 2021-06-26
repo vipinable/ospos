@@ -1,0 +1,8 @@
+- hosts: all
+  gather_facts: False
+  user: pi
+  become: yes
+  roles:
+  - app
+  - db
+  - zj58

@@ -1,0 +1,4 @@
+- name: restartIptables
+  service:
+    name: iptables
+    state: reloaded

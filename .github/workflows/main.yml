@@ -28,5 +28,5 @@ jobs:
         run: |
           python3 -m venv /tmp/py3
           source /tmp/py3/bin/activate
-          pip install 'ansible==2.9.13'
+          pip install 'ansible==2.9'
           ansible --version

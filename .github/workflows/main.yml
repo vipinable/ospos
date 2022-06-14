@@ -31,3 +31,6 @@ jobs:
           pip install --upgrade pip 
           pip install 'ansible==2.9'
           ansible --version
+          curl https://releases.hashicorp.com/terraform/1.2.2/terraform_1.2.2_linux_amd64.zip -o terraform_1.2.2_linux_amd64.zip
+          unzip terraform_1.2.2_linux_amd64.zip
+          ./terraform --version

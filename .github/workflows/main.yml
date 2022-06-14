@@ -27,6 +27,8 @@ jobs:
       - name: Build and Deploy
         env: 
            SSH_PUBKEY: ${{ secrets.SSH_PUBKEY }}
+           VAULT_PASS: ${{ secrets.VAULT_PASS }}
+           ANSIBLE_VAULT_PASSWORD_FILE: ~/.vault_pass.txt
         run: |
           python3 -m venv /tmp/py3
           source /tmp/py3/bin/activate
@@ -36,6 +38,7 @@ jobs:
           #curl https://releases.hashicorp.com/terraform/1.2.2/terraform_1.2.2_linux_amd64.zip -o terraform_1.2.2_linux_amd64.zip
           #unzip terraform_1.2.2_linux_amd64.zip
           #./terraform --version
+          echo ${VAULT_PASS} > ~/.vault_pass.txt
           mkdir ~/.ssh && echo $SSH_PUBKEY > ~/.ssh/id_rsa.pub && echo $SSH_PVTKEY > ~/.ssh/id_rsa
           cat ~/.ssh/id_rsa.pub
           ansible all -i 129.213.115.117, -m ping

@@ -31,10 +31,10 @@ jobs:
           python3 -m venv /tmp/py3
           source /tmp/py3/bin/activate
           pip install --upgrade pip 
-          pip install 'ansible==2.9'
-          ansible --version
-          curl https://releases.hashicorp.com/terraform/1.2.2/terraform_1.2.2_linux_amd64.zip -o terraform_1.2.2_linux_amd64.zip
-          unzip terraform_1.2.2_linux_amd64.zip
-          ./terraform --version
-          echo $SSH_PUBKEY > ~/.ssh/id_rsa.pub
+          #pip install 'ansible==2.9'
+          #ansible --version
+          #curl https://releases.hashicorp.com/terraform/1.2.2/terraform_1.2.2_linux_amd64.zip -o terraform_1.2.2_linux_amd64.zip
+          #unzip terraform_1.2.2_linux_amd64.zip
+          #./terraform --version
+          mkdir ~/.ssh && echo $SSH_PUBKEY > ~/.ssh/id_rsa.pub
           cat ~/.ssh/id_rsa.pub

@@ -41,4 +41,4 @@ jobs:
           echo ${VAULT_PASS} > ~/.vault_pass.txt
           mkdir ~/.ssh && echo $SSH_PUBKEY > ~/.ssh/id_rsa.pub && echo $SSH_PVTKEY > ~/.ssh/id_rsa
           cat ~/.ssh/id_rsa.pub
-          ansible all -i 129.213.115.117, -m ping
+          ansible all -i 129.213.115.117, -m ping -u ubuntu

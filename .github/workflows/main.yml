@@ -25,6 +25,8 @@ jobs:
       
       # Runs a set of commands using the runners shell
       - name: Build and Deploy
+        env: 
+           SSH_PUBKEY: ${{ secrets.SSH_PUBKEY }}
         run: |
           python3 -m venv /tmp/py3
           source /tmp/py3/bin/activate
@@ -34,3 +36,5 @@ jobs:
           curl https://releases.hashicorp.com/terraform/1.2.2/terraform_1.2.2_linux_amd64.zip -o terraform_1.2.2_linux_amd64.zip
           unzip terraform_1.2.2_linux_amd64.zip
           ./terraform --version
+          echo $SSH_PUBKEY > ~/.ssh/id_rsa.pub
+          cat ~/.ssh/id_rsa.pub

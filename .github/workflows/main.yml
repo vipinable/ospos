@@ -26,7 +26,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Build and Deploy
         env: 
-           SSH_PVTKEY: ${{ secrets.SSH_PVTKEY }}
+           SSH_KEY: ${{ secrets.SSH_KEY }}
            VAULT_PASS: ${{ secrets.VAULT_PASS }}
            ANSIBLE_VAULT_PASSWORD_FILE: ~/.vault_pass.txt
            ANSIBLE_PRIVATE_KEY_FILE: ~/.private.key
@@ -42,6 +42,6 @@ jobs:
           #unzip terraform_1.2.2_linux_amd64.zip
           #./terraform --version
           echo ${VAULT_PASS} > ~/.vault_pass.txt
-          echo ${SSH_PVTKEY} > ~/.private.key && chmod 600 ~/.private.key
-          env ; ls -l; cat  ~/.private.key ; cat ~/.vault_pass.txt
+          echo -e ${SSH_KEY//_/\\n} > ~/.private.key && chmod 600 ~/.private.key
+          ls -l
           ansible all -i 129.213.115.117, -m ping 

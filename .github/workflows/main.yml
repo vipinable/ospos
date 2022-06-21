@@ -41,7 +41,6 @@ jobs:
           #unzip terraform_1.2.2_linux_amd64.zip
           #./terraform --version
           echo ${VAULT_PASS} > ~/.vault_pass.txt
-          echo ${SSH_PVTKEY} > ~/.private.key
-          mkdir ~/.ssh && echo $SSH_PUBKEY > ~/.ssh/id_rsa.pub && echo $SSH_PVTKEY > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
-          cat ~/.ssh/id_rsa.pub
+          echo ${SSH_PVTKEY} > ~/.private.key && chmod 600 ~/.private.key
+          env ; ls -l; cat  ~/.private.key ; cat ~/.vault_pass.txt
           ansible all -i 129.213.115.117, -m ping 

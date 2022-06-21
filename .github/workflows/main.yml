@@ -31,6 +31,7 @@ jobs:
            ANSIBLE_VAULT_PASSWORD_FILE: ~/.vault_pass.txt
            ANSIBLE_PRIVATE_KEY_FILE: ~/.private.key
            ANSIBLE_REMOTE_USER: ${{ secrets.SSH_USER }}
+           ANSIBLE_HOST_KEY_CHECKING: 'False'
         run: |
           python3 -m venv /tmp/py3
           source /tmp/py3/bin/activate
